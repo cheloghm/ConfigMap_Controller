@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - configmap-controller.cluster-config
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - configmap-controller.cluster-config
+  resources:
+  - configmaps/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - configmap-controller.cluster-config
+  resources:
+  - configmaps/status
+  verbs:
+  - get
+  - patch
+  - update

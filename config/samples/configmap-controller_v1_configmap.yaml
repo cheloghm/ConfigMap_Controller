@@ -1,0 +1,6 @@
+apiVersion: configmap-controller.cluster-config/v1
+kind: ConfigMap
+metadata:
+  name: configmap-sample
+spec:
+  # TODO(user): Add fields here
