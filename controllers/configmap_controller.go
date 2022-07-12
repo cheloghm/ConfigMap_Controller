@@ -88,8 +88,8 @@ type ConfigMapInterface interface {
 	Delete(name string, options *api.DeleteOptions) error
 	DeleteCollection(options *api.DeleteOptions, listOptions api.ListOptions) error
 	Get(name string) (*configmapcontrollerv1.ConfigMap, error)
-	//List(opts api.ListOptions) (*v1.ConfigMapList, error)
-	//Watch(opts api.ListOptions) (watch.Interface, error)
+	List(opts api.ListOptions) (*v1.ConfigMapList, error)
+	Watch(opts api.ListOptions) (watch.Interface, error)
 	Patch(name string, pt api.PatchType, data []byte, subresources ...string) (result *configmapcontrollerv1.ConfigMap, err error)
 	ConfigMapExpansion
 }
@@ -209,7 +209,7 @@ def getConfigMapLabels(configmap):
     r = requests.get(url)
     // Issue the HTTP request to the appropriate endpoint
     response = r.json()
-    // Extract the podSelector part from each object in the response
+    // Extract the needed Selectors part from each object in the response
     pod_labels_json = [i["spec"]["data"]
               for i in response['items'] if i['spec']['configmap'] == "flaskapp-config"]
     result = [list(l.keys())[0] + "=" + l[list(l.keys())[0]]
@@ -224,7 +224,7 @@ def getConfigMapLabels(configmap):
     r = requests.get(url)
     // Issue the HTTP request to the appropriate endpoint
     response = r.json()
-    // Extract the podSelector part from each object in the response
+    // Extract the the needed Selectors part from each object in the response
     pod_labels_json = [i["spec"]["generateTo"]["namespaceSelectors"]
               for i in response['items'] if i['spec']['configmap'] == "flaskapp-config"]
     result = [list(l.keys())[0] + "=" + l[list(l.keys())[0]]
